@@ -59,8 +59,8 @@ class WheelCurvedPicker extends React.Component {
 		itemSpace: 20
 	}
 
-	componentWillReceiveProps (props) {
-		this.setState(this._stateFromProps(props));
+	componentDidUpdate (prevProps) {
+		if (prevProps.selectedIndex !== this.props.selectedIndex) this.setState(this._stateFromProps(props))
 	}
 
 	_stateFromProps (props) {
