@@ -59,25 +59,13 @@ class WheelCurvedPicker extends React.Component {
 		itemSpace: 20
 	}
 
-	static getDerivedStateFromProps(props, state) {
-		var selectedIndex = 0;
-		var items = [];
-		React.Children.forEach(props.children, function (child, index) {
-			if (child.props.value === props.selectedValue) {
-				selectedIndex = index;
-			}
-			items.push({value: child.props.value, label: child.props.label});
-		});
-
-		var textSize = props.itemStyle.fontSize
-		var textColor = props.itemStyle.color
-
-		return {selectedIndex, items, textSize, textColor};
+	componentDidUpdate (prevProps, prevState) {
+		if (prevState.selectedIndex !== this.props.selectedValue) this.setState(this._stateFromProps(this.props))
 	}
 
 	_stateFromProps (props) {
-		var selectedIndex = 0;
-		var items = [];
+		let selectedIndex = 0;
+		const items = [];
 		React.Children.forEach(props.children, function (child, index) {
 			if (child.props.value === props.selectedValue) {
 				selectedIndex = index;
@@ -85,8 +73,8 @@ class WheelCurvedPicker extends React.Component {
 			items.push({value: child.props.value, label: child.props.label});
 		});
 
-		var textSize = props.itemStyle.fontSize
-		var textColor = props.itemStyle.color
+		const textSize = props.itemStyle.fontSize
+		const textColor = props.itemStyle.color
 
 		return {selectedIndex, items, textSize, textColor};
 	}
